@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stimulus 200 Steps - Stimulusを基礎から学ぶ200ステップ</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- コードエディタ（CodeMirror）。CDNが使えない環境ではtextareaに自動フォールバックする -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <header id="sidebar-header">
+        <h1>Stimulus 200 Steps</h1>
+        <div id="progress-wrap">
+          <div id="progress-bar"><div id="progress-fill"></div></div>
+          <span id="progress-label">0 / 200</span>
+        </div>
+      </header>
+      <nav id="toc" aria-label="ステップ一覧"></nav>
+      <footer id="sidebar-footer">
+        <span id="backend-badge">実行環境：ブラウザ内サンドボックス（Stimulus 3.2.2）</span>
+      </footer>
+    </aside>
+
+    <main id="main">
+      <div id="step-view" hidden>
+        <div id="step-header">
+          <p id="step-breadcrumb"></p>
+          <h2 id="step-title"></h2>
+        </div>
+
+        <section id="explanation" aria-label="解説"></section>
+
+        <section id="task-box" aria-label="課題">
+          <h3>課題</h3>
+          <p id="task-text"></p>
+        </section>
+
+        <section id="editor-section" aria-label="コードエディタ">
+          <div id="editor-toolbar">
+            <button id="btn-run" class="primary" title="Cmd+Enter / Ctrl+Enter">実行する</button>
+            <button id="btn-reset" title="コードを初期状態に戻す">リセット</button>
+            <button id="btn-hint">ヒント</button>
+            <button id="btn-solution">模範解答</button>
+          </div>
+          <div id="editor-host">
+            <textarea id="code-editor" spellcheck="false" aria-label="HTMLとStimulusのコード"></textarea>
+          </div>
+          <div id="hints-box" hidden></div>
+          <div id="solution-box" hidden>
+            <h4>模範解答</h4>
+            <pre><code id="solution-code"></code></pre>
+            <button id="btn-apply-solution">この解答をエディタに反映する</button>
+          </div>
+        </section>
+
+        <section id="output-section" aria-label="実行結果" hidden>
+          <div id="output-status"></div>
+          <div id="preview-block">
+            <h3>プレビュー（実際に触って動作を確認できます）</h3>
+            <iframe id="preview-frame" sandbox="allow-scripts" title="実行プレビュー"></iframe>
+          </div>
+          <div id="console-block" hidden>
+            <h3>コンソール出力</h3>
+            <pre id="console-output"></pre>
+          </div>
+        </section>
+
+        <nav id="step-nav">
+          <button id="btn-prev">前のステップ</button>
+          <label id="done-toggle">
+            <input type="checkbox" id="chk-done"> 完了にする
+          </label>
+          <button id="btn-next" class="primary">次のステップ</button>
+        </nav>
+      </div>
+
+      <div id="welcome" class="placeholder">
+        <h2>ようこそ</h2>
+        <p>左のステップ一覧から始めましょう。教材データを読み込み中です...</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- 教材データ（各章10ステップ、計200ステップ） -->
+  <script src="app-register.js"></script>
+  <script src="content/chapter01.js"></script>
+  <script src="content/chapter02.js"></script>
+  <script src="content/chapter03.js"></script>
+  <script src="content/chapter04.js"></script>
+  <script src="content/chapter05.js"></script>
+  <script src="content/chapter06.js"></script>
+  <script src="content/chapter07.js"></script>
+  <script src="content/chapter08.js"></script>
+  <script src="content/chapter09.js"></script>
+  <script src="content/chapter10.js"></script>
+  <script src="content/chapter11.js"></script>
+  <script src="content/chapter12.js"></script>
+  <script src="content/chapter13.js"></script>
+  <script src="content/chapter14.js"></script>
+  <script src="content/chapter15.js"></script>
+  <script src="content/chapter16.js"></script>
+  <script src="content/chapter17.js"></script>
+  <script src="content/chapter18.js"></script>
+  <script src="content/chapter19.js"></script>
+  <script src="content/chapter20.js"></script>
+  <script src="content/chapter21.js"></script>
+  <script src="content/chapter22.js"></script>
+  <script src="content/chapter23.js"></script>
+  <script src="content/chapter24.js"></script>
+  <script src="content/chapter25.js"></script>
+  <script src="runner.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

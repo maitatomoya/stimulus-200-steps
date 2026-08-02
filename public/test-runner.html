@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Stimulus教材 一括検証</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #frame-host iframe { width: 400px; height: 200px; border: 1px solid #ccc; }
+    .fail { color: #c0392b; }
+    .ok { color: #1a7f37; }
+    #summary { font-weight: bold; font-size: 18px; margin: 12px 0; }
+    pre { background: #f4f4f4; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Stimulus教材 一括検証（全ステップのsolution＋check）</h1>
+  <div id="summary">読み込み中...</div>
+  <div id="frame-host"></div>
+  <pre id="results"></pre>
+
+  <script src="app-register.js"></script>
+  <script src="content/chapter01.js"></script>
+  <script src="content/chapter02.js"></script>
+  <script src="content/chapter03.js"></script>
+  <script src="content/chapter04.js"></script>
+  <script src="content/chapter05.js"></script>
+  <script src="content/chapter06.js"></script>
+  <script src="content/chapter07.js"></script>
+  <script src="content/chapter08.js"></script>
+  <script src="content/chapter09.js"></script>
+  <script src="content/chapter10.js"></script>
+  <script src="content/chapter11.js"></script>
+  <script src="content/chapter12.js"></script>
+  <script src="content/chapter13.js"></script>
+  <script src="content/chapter14.js"></script>
+  <script src="content/chapter15.js"></script>
+  <script src="content/chapter16.js"></script>
+  <script src="content/chapter17.js"></script>
+  <script src="content/chapter18.js"></script>
+  <script src="content/chapter19.js"></script>
+  <script src="content/chapter20.js"></script>
+  <script src="content/chapter21.js"></script>
+  <script src="content/chapter22.js"></script>
+  <script src="content/chapter23.js"></script>
+  <script src="content/chapter24.js"></script>
+  <script src="content/chapter25.js"></script>
+  <script src="runner.js"></script>
+  <script>
+    // 全ステップのsolutionをcheckで検証し、結果を#resultsに出力する
+    (async function () {
+      var steps = [];
+      (window.RUST_TUTOR_CHAPTERS || []).forEach(function (ch) {
+        (ch.steps || []).forEach(function (s) { steps.push(s); });
+      });
+      steps.sort(function (a, b) { return a.id - b.id; });
+
+      // URLパラメータで範囲指定できる（?from=1&to=50）
+      var params = new URLSearchParams(location.search);
+      var from = Number(params.get("from") || 1);
+      var to = Number(params.get("to") || 200);
+      steps = steps.filter(function (s) { return s.id >= from && s.id <= to; });
+
+      var host = document.getElementById("frame-host");
+      var out = document.getElementById("results");
+      var summary = document.getElementById("summary");
+      var failures = [];
+      var done = 0;
+
+      for (var i = 0; i < steps.length; i++) {
+        var step = steps[i];
+        var iframe = document.createElement("iframe");
+        iframe.sandbox = "allow-scripts";
+        host.innerHTML = "";
+        host.appendChild(iframe);
+
+        var result = await new Promise(function (resolve) {
+          StimulusRunner.run(iframe, step.solution || "", step.check || "", {
+            onConsole: function () {},
+            onResult: function (pass, message) {
+              resolve({ pass: pass, message: message });
+            },
+          });
+        });
+
+        done++;
+        if (!result.pass) {
+          failures.push({ id: step.id, title: step.title, message: result.message });
+          out.textContent += step.id + " NG: " + step.title + " — " + result.message + "\n";
+        } else {
+          out.textContent += step.id + " OK\n";
+        }
+        summary.textContent =
+          done + "/" + steps.length + " 完了（失敗 " + failures.length + "件）";
+      }
+
+      summary.textContent =
+        "検証完了: " + done + "件中 失敗" + failures.length + "件";
+      summary.className = failures.length ? "fail" : "ok";
+      // 機械読み取り用のJSON
+      window.__TEST_RESULT__ = { total: done, failures: failures };
+      summary.dataset.json = JSON.stringify(window.__TEST_RESULT__);
+    })();
+  </script>
+</body>
+</html>
