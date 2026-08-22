@@ -24,7 +24,12 @@ cd stimulus-200-steps
 node server.js
 ```
 
-ブラウザで http://localhost:3943 を開く。
+起動するとターミナルにURLが表示されるので、ブラウザで開く（デフォルトは http://localhost:3943 ）。
+ポートは環境変数PORTで変更できる。
+
+```bash
+PORT=8080 node server.js
+```
 
 ## カリキュラム
 
@@ -62,4 +67,4 @@ node server.js
 node scripts/validate.js
 ```
 
-全ステップの模範解答＋自動判定の一括検証は、サーバー起動後に http://localhost:3943/test-runner.html を開く。
+全ステップの模範解答＋自動判定の一括検証は、サーバー起動後に「表示されたURL + /test-runner.html」を開く。
