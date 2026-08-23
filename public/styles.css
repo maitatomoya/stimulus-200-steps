@@ -397,3 +397,83 @@ button:disabled { opacity: 0.6; cursor: wait; }
   margin: 12px 0 6px;
   color: var(--text-sub);
 }
+
+/* 「はじめに」（言語紹介）ページ */
+.toc-intro {
+  display: block;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--rust-orange-dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.toc-intro:hover { background: #eee8e2; }
+.toc-intro.active {
+  background: var(--rust-orange);
+  color: #fff;
+}
+
+.intro-page {
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--text);
+  line-height: 1.85;
+}
+
+.intro-page h2 {
+  font-size: 26px;
+  border-bottom: 3px solid var(--rust-orange);
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+
+.intro-page h3 {
+  color: var(--rust-orange-dark);
+  margin: 30px 0 10px;
+  font-size: 19px;
+}
+
+.intro-page p { margin: 10px 0; }
+
+.intro-page table {
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 14px;
+  width: 100%;
+}
+
+.intro-page th, .intro-page td {
+  border: 1px solid var(--border);
+  padding: 7px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.intro-page th { background: var(--bg-side); }
+
+.intro-page code {
+  background: var(--code-bg);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+
+.intro-page ul, .intro-page ol { padding-left: 24px; }
+.intro-page li { margin: 6px 0; }
+
+.intro-page .intro-note {
+  background: var(--bg-side);
+  border-left: 5px solid var(--rust-orange);
+  border-radius: 6px;
+  padding: 12px 18px;
+  margin: 16px 0;
+}
+
+.intro-page button {
+  margin-top: 24px;
+  font-size: 16px;
+  padding: 12px 28px;
+}
